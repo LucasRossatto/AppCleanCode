@@ -32,7 +32,7 @@ const userController = {
       });
     }
   },
-  getById: async (req, res) => {
+  getByOne: async (req, res) => {
     try {
       const user = await userService.getById(req.body);
       if (!user) {
@@ -52,15 +52,15 @@ const userController = {
   },
   getAll: async (req, res) => {
     try {
-      const user = await userService.getAll(req.body);
-      if (!user) {
+      const users = await userService.getAll(req.body);
+      if (!users) {
         return res.status(400).json({
           msg: "Usuarios não encontrados",
         });
       }
       return res.status(201).json({
         msg: "Usuários encontrados com sucesso!",
-        users_encontrados: user,
+        users_encontrados: users,
       });
     } catch (error) {
       return res.status(200).json({
