@@ -32,7 +32,7 @@ const userController = {
       });
     }
   },
-  getByOne: async (req, res) => {
+  getOne: async (req, res) => {
     try {
       const user = await userService.getById(req.body);
       if (!user) {
