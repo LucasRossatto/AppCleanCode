@@ -38,18 +38,36 @@ const adminController = {
 
   forgetPassword: async (req, res) => {
     try {
-      const { email, novaSenha } = req.body;
+      const { email } = req.body;
+      const admin = await Admin.findOne({ where: { email } });
 
-      const admin = await Admin.findOne({ where: { email: req.body.email } });
-      
       if (!admin) {
         return res.status(400).json({
           msg: "Email não encontrado",
         });
       }
+      const token = jwt.sign({ email: admin.email }, process.env.SECRET, {
+        expiresIn: "1h",
+      });
 
+      if (!token) {
+        return res.status(400).json({
+          msg: "Token Token inválido ou expirado",
+        });
+      }
+      const { novaSenha } = req.body;
+
+      if(!novaSenha){
+        return res.status(400).json({
+          msg: "Senha inválida",
+        });
+      }
+      
+      const hashedPassword = await bcrypt.hash(novaSenha, 10);
+      admin.senha = hashedPassword;
+      admin.save();
       return res.status(200).json({
-        msg: "Senha atualizada com sucesso!",
+        msg: "Senha alterada com sucesso!",
       });
     } catch (error) {
       console.error(error);

@@ -19,7 +19,7 @@ router.delete("/:id", validateAdminId, adminController.delete);
 router.get("/:id", validateAdminId, adminController.getOne);
 
 // funcao esqueci senha
-router.put("/EsqueciSenha", validateAdmin,validateAdminId, adminController.forgetPassword);
+router.put("/esq/EsqueciSenha", adminController.forgetPassword);
 
 router.get("/",adminController.getAll); // funcao buscar todos
 

@@ -1,4 +1,3 @@
-const { forgetPassword } = require("../controllers/adminController");
 const Admin = require("../models/admin");
 
 const adminService = {
@@ -22,15 +21,21 @@ const adminService = {
       throw new Error("Ocorreu um erro ao atualizar Admin");
     }
   },
-  forgetPassword: async (id, adminToUpdate) => {
+  forgetPassword: async (novaSenha, email) => {
     try {
-      const admin = await Admin.findByPk(id);
+      const admin = await Admin.findOne({ where: { email } });
       if (!admin) {
         return null;
       }
-      await admin.update(adminToUpdate);
-      await admin.save();
-      return admin;
+
+      if(!novaSenha){
+        return res.status(400).json({
+          msg: "Campos inválidos",
+        });
+      }
+      const hashedPassword = await bcrypt.hash(novaSenha, 10);
+      admin.senha = hashedPassword;
+      admin.save();
     } catch (error) {
       throw new Error("Ocorreu um erro ao atualizar a senha");
     }
