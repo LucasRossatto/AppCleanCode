@@ -15,6 +15,7 @@ router.delete("/:id", validateUser, userController.delete); // parametro id
 // funcao buscar unico
 router.get("/:id", validateUser, userController.getOne); // parametro id
 
-router.get("/", userController.getAll); // funcao buscar todos
+// funcao buscar todos
+router.get("/", userController.getAll); 
 
 module.exports = router;

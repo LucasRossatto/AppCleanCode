@@ -27,8 +27,7 @@ const adminService = {
       if (!admin) {
         return null;
       }
-
-      if(!novaSenha){
+      if (!novaSenha) {
         return res.status(400).json({
           msg: "Campos inválidos",
         });

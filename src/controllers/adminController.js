@@ -52,19 +52,20 @@ const adminController = {
 
       if (!token) {
         return res.status(400).json({
-          msg: "Token Token inválido ou expirado",
+          msg: "Token inválido ou expirado",
         });
       }
       const { novaSenha } = req.body;
 
-      if(!novaSenha){
+      if (!novaSenha) {
         return res.status(400).json({
           msg: "Senha inválida",
         });
       }
-      
+
       const hashedPassword = await bcrypt.hash(novaSenha, 10);
       admin.senha = hashedPassword;
+
       admin.save();
       return res.status(200).json({
         msg: "Senha alterada com sucesso!",
@@ -156,7 +157,7 @@ const adminController = {
       const adminEncontrado = await Admin.findByPk(id);
       if (adminEncontrado == null) {
         return res.status(404).json({
-          msg: "Admin nãó encontrado",
+          msg: "Admin não encontrado",
         });
       }
       await adminEncontrado.destroy();

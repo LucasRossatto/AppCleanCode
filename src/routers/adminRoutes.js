@@ -21,6 +21,7 @@ router.get("/:id", validateAdminId, adminController.getOne);
 // funcao esqueci senha
 router.put("/esq/EsqueciSenha", adminController.forgetPassword);
 
-router.get("/",adminController.getAll); // funcao buscar todos
+// funcao buscar todos
+router.get("/",adminController.getAll); 
 
 module.exports = router;

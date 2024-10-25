@@ -11,11 +11,11 @@ const User = sequelize.define(
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true // Email unico
+      unique: true, // Email unico
     },
   },
   {
-    timestamps: true // Para armazenar a hora que foi criado o user
+    timestamps: true, // Para armazenar a hora que foi criado o user
   }
 );
 

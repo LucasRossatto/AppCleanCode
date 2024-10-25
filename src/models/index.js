@@ -5,7 +5,7 @@ const sequelize = require("../config/database");
 const db = [];
 
 fs.readdirSync(__dirname)
-  .filter((file => file !== "index.js")) // User.js
+  .filter((file) => file !== "index.js") // User.js
   .forEach((file) => {
     // Capturando cada arquivo individualmente
     const model = require(path.join(__dirname, file));
